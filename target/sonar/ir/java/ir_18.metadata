@@ -1,0 +1,1 @@
+com.assignment.controller.DistrictController#getAllDistricts(Lorg/springframework/ui/Model;)Ljava/lang/String;

@@ -1,0 +1,10 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+state_manager,com.assignment.service,StateServiceImpl,0,43,0,2,0,12,0,6,0,5
+state_manager,com.assignment.service,StateServiceImpl.DistrictNotFoundException,0,4,0,0,0,2,0,1,0,1
+state_manager,com.assignment.service,DistrictServiceImpl.StateNotFoundException,0,4,0,0,0,2,0,1,0,1
+state_manager,com.assignment.service,DistrictServiceImpl,0,43,0,2,0,12,0,6,0,5
+state_manager,com.assignment.controller,StateController,14,70,0,2,4,20,0,8,0,7
+state_manager,com.assignment.controller,DistrictController,18,193,0,6,6,48,0,11,0,8
+state_manager,com.assignment.entity,State,0,73,0,2,0,13,0,14,0,13
+state_manager,com.assignment.entity,District,0,36,0,0,0,6,0,8,0,8
+state_manager,com.assignment,IndiaDetailsApplication,0,8,0,0,0,3,0,2,0,2

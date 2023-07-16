@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>State.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">state_manager</a> &gt; <a href="index.source.html" class="el_package">com.assignment.entity</a> &gt; <span class="el_source">State.java</span></div><h1>State.java</h1><pre class="source lang-java linenums">package com.assignment.entity;
+
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import lombok.*;
+
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="fc" id="L13">@Setter</span>
+@Getter
+<span class="fc" id="L15">@AllArgsConstructor</span>
+<span class="fc" id="L16">@NoArgsConstructor</span>
+@Entity
+@Table(name = &quot;state&quot;)
+public class State {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name=&quot;id&quot;)
+
+<span class="fc" id="L24">    private  int id;</span>
+
+    @Column(name=&quot;name&quot;)
+    @NotEmpty(message = &quot;name should not be blank&quot;)
+<span class="fc" id="L28">    private String name;</span>
+
+    @Column(name = &quot;no_district&quot;)
+    @NotNull(message = &quot;no_district should not be blank&quot;)
+    @Min(value = 0,message = &quot;min 1 value&quot;)
+<span class="fc" id="L33">    private Integer no_district;</span>
+
+    @Column(name=&quot;capital&quot;)
+    @NotEmpty(message = &quot;capital should not be blank&quot;)
+<span class="fc" id="L37">    private  String capital;</span>
+
+    @OneToMany(mappedBy=&quot;state&quot;,
+            cascade= {CascadeType.ALL})
+<span class="fc" id="L41">    private List&lt;District&gt; districts;</span>
+
+    public void add(District tempDistrict) {
+
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        if (districts == null) {</span>
+<span class="fc" id="L46">            districts = new ArrayList&lt;&gt;();</span>
+        }
+<span class="fc" id="L48">        districts.add(tempDistrict);</span>
+
+<span class="fc" id="L50">        tempDistrict.setState(this);</span>
+<span class="fc" id="L51">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

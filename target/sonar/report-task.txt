@@ -1,0 +1,7 @@
+organization=harsha61
+projectKey=com.assignment:springboot_assignments
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.40601
+dashboardUrl=https://sonarcloud.io/dashboard?id=com.assignment%3Aspringboot_assignments
+ceTaskId=AYfmJwMxzofs7zNWKLtY
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AYfmJwMxzofs7zNWKLtY

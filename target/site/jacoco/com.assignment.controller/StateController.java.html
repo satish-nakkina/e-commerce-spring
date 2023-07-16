@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StateController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">state_manager</a> &gt; <a href="index.source.html" class="el_package">com.assignment.controller</a> &gt; <span class="el_source">StateController.java</span></div><h1>StateController.java</h1><pre class="source lang-java linenums">package com.assignment.controller;
+
+import com.assignment.entity.State;
+import com.assignment.service.StateService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Date;
+import java.util.List;
+
+@Controller
+@RequestMapping(&quot;states&quot;)
+<span class="fc" id="L18">public class StateController {</span>
+
+    @Autowired
+    StateService stateService;
+<span class="fc" id="L22">    String stateForm=&quot;state/state-form&quot;;</span>
+    @GetMapping(&quot;/welcome&quot;)
+    public  String welcome(Model theModel){
+<span class="fc" id="L25">        theModel.addAttribute(&quot;theDate&quot;,new Date());</span>
+<span class="fc" id="L26">        return &quot;welcome&quot;;</span>
+    }
+    @GetMapping(&quot;/list&quot;)
+    public  String list(Model theModel){
+<span class="fc" id="L30">        List&lt;State&gt; theState= stateService.findAll();</span>
+<span class="fc" id="L31">        theModel.addAttribute(&quot;states&quot;,theState);</span>
+<span class="fc" id="L32">        return &quot;state/state-list&quot;;</span>
+
+    }
+
+    @GetMapping(&quot;/add&quot;)
+    public  String add(Model theModel){
+
+<span class="fc" id="L39">        State theState= new State();</span>
+<span class="fc" id="L40">        theModel.addAttribute(&quot;state&quot;, theState);</span>
+<span class="fc" id="L41">        return stateForm;</span>
+    }
+
+    @PostMapping(&quot;/save&quot;)
+    public  String save(@ModelAttribute(&quot;state&quot;) @Valid State theState,BindingResult bindingResult){
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        if(bindingResult.hasErrors()){</span>
+<span class="fc" id="L47">            return stateForm;</span>
+        }
+        else{
+            try {
+<span class="fc" id="L51">                stateService.save(theState);</span>
+<span class="nc" id="L52">            } catch (DataIntegrityViolationException ex) {</span>
+<span class="nc" id="L53">                bindingResult.rejectValue(&quot;name&quot;, &quot;error.state&quot;, &quot;This state and capital is already added&quot;);</span>
+<span class="nc" id="L54">                bindingResult.rejectValue(&quot;capital&quot;, &quot;error.state&quot;, &quot;This state and capital is already added&quot;);</span>
+
+<span class="nc" id="L56">                return stateForm;</span>
+<span class="fc" id="L57">            }</span>
+<span class="fc" id="L58">            return &quot;redirect:/states/list&quot;;}</span>
+    }
+    @GetMapping(&quot;/delete&quot;)
+    public  String delete(@RequestParam(&quot;stateId&quot;) int stateId ){
+<span class="fc" id="L62">        stateService.deleteById(stateId);</span>
+<span class="fc" id="L63">        return &quot;redirect:/states/list&quot;;</span>
+    }
+
+
+    @GetMapping(&quot;/update&quot;)
+    public String update(@RequestParam(&quot;stateId&quot;) int stateId,Model theModel){
+<span class="fc" id="L69">        State theState= stateService.findById(stateId);</span>
+<span class="fc" id="L70">        theModel.addAttribute(&quot;state&quot;,theState);</span>
+<span class="fc" id="L71">        return stateForm;</span>
+    }
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

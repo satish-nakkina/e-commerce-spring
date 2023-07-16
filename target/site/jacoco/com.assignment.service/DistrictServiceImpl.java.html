@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DistrictServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">state_manager</a> &gt; <a href="index.source.html" class="el_package">com.assignment.service</a> &gt; <span class="el_source">DistrictServiceImpl.java</span></div><h1>DistrictServiceImpl.java</h1><pre class="source lang-java linenums">package com.assignment.service;
+
+import com.assignment.dao.DistrictRepository;
+import com.assignment.entity.District;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+<span class="fc" id="L12">public class DistrictServiceImpl implements  DistrictService{</span>
+    @Autowired
+    DistrictRepository districtRepository;
+
+    public static class StateNotFoundException extends RuntimeException {
+        public StateNotFoundException(String message) {
+<span class="fc" id="L18">            super(message);</span>
+<span class="fc" id="L19">        }</span>
+    }
+    public List&lt;District&gt; findAll(){
+<span class="fc" id="L22">        return  districtRepository.findAll();</span>
+    }
+
+    @Override
+    public void save(District theCourse) {
+<span class="fc" id="L27">        districtRepository.save(theCourse);</span>
+<span class="fc" id="L28">    }</span>
+
+    @Override
+    public District findById(int theId) {
+<span class="fc" id="L32">        Optional&lt;District&gt; districtById=districtRepository.findById(theId);</span>
+<span class="fc" id="L33">        District district=null;</span>
+<span class="fc bfc" id="L34" title="All 2 branches covered.">        if (districtById.isPresent())</span>
+        {
+<span class="fc" id="L36">            district= districtById.get();</span>
+        }
+        else{
+<span class="fc" id="L39">            throw new StateNotFoundException(&quot;Did not find state id - &quot; + theId);</span>
+
+        }
+<span class="fc" id="L42">        return district;</span>
+    }
+    @Override
+    public void deleteById(int theId) {
+<span class="fc" id="L46">        districtRepository.deleteById(theId);</span>
+<span class="fc" id="L47">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
